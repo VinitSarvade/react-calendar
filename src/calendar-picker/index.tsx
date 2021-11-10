@@ -12,11 +12,17 @@ import {
 interface CalendarProps {
   selectedDate?: Date;
   onDateSelect?: (date: Date) => void;
-  disabledFutureDates?: boolean;
+  disableFutureDates?: boolean;
+  disablePastDates?: boolean;
 }
 
 export default function Calendar(props: CalendarProps) {
-  const { selectedDate, onDateSelect, disabledFutureDates = false } = props;
+  const {
+    selectedDate,
+    onDateSelect,
+    disableFutureDates = false,
+    disablePastDates = false
+  } = props;
 
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -48,6 +54,11 @@ export default function Calendar(props: CalendarProps) {
     (date > today.getDate() && currentMonth === today.getMonth()) ||
     (currentMonth > today.getMonth() && currentYear === today.getFullYear()) ||
     currentYear > today.getFullYear();
+
+  const isPastDate = (date: number) =>
+    (date < today.getDate() && currentMonth === today.getMonth()) ||
+    (currentMonth < today.getMonth() && currentYear === today.getFullYear()) ||
+    currentYear < today.getFullYear();
 
   return (
     <div className="calendar">
@@ -81,7 +92,12 @@ export default function Calendar(props: CalendarProps) {
           <div
             className={`calendar__body-day
                 ${isSelectedDate(date) ? "selected" : ""}
-                ${disabledFutureDates && isFutureDate(date) ? "disabled" : ""}
+                ${
+                  (disableFutureDates && isFutureDate(date)) ||
+                  (disablePastDates && isPastDate(date))
+                    ? "disabled"
+                    : ""
+                }
                 ${isToday(date) ? "today" : ""}
             `}
             key={`curr-${date}`}

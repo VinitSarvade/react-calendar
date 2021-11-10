@@ -6,11 +6,7 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState<Date>();
   return (
     <div className="App">
-      <Calendar
-        selectedDate={selectedDate}
-        onDateSelect={setSelectedDate}
-        disabledFutureDates
-      />
+      <Calendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
       <br />
       <br />
       {selectedDate?.toDateString()}

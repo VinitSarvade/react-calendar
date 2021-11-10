@@ -1,9 +1,7 @@
-$text-color: #333;
-$border-color: #777;
-
 body {
   font-size: 16px;
-  color: $text-color;
+  color: #333;
+  background-color: #e3e3e3;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -14,25 +12,4 @@ h1,h2,h3,h4,h5,h6 {
 .App {
   font-family: sans-serif;
   text-align: center;
-}
-
-.btn {
-  padding: 0.75rem 1rem;
-  border-radius: 0.25rem;
-  background-color: transparent;  
-  border-style: solid;
-  border-color: $border-color;
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
-
-  &:active {
-    background-color: #eee;
-  }
-
-  &.btn--selected {
-    background-color: #08c;
-    color: #fff;
-    border-color: lighten($color: #08c, $amount: 10)
-  }
 }
